@@ -17,6 +17,10 @@ RUN cd ibc-rs && git checkout $TAG && cargo build --release
 FROM debian:buster-slim
 LABEL maintainer="hello@informal.systems"
 
+RUN apt-get update && apt-get install -y \
+  ca-certificates \
+  && rm -rf /var/lib/apt/lists/*
+
 RUN useradd -m hermes -s /bin/bash
 WORKDIR /home/hermes
 USER hermes:hermes
